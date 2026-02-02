@@ -7,7 +7,7 @@
 [![Version](https://img.shields.io/badge/version-v1.3-blue)](https://github.com/pythonlover2023/IrsanAI-LRP)
 
 ## Offical Landingpage
-👉 https://github.com/pythonlover2023/IrsanAI-LRP-v1.3/IrsanAI - Logic Factory.html
+👉 https://github.com/pythonlover2023/IrsanAI-LRP-v1.3/IrsanAI_Logic_Factory.html
 
 ## Primary Edition and Insights
 👉 https://pythonlover2023.github.io/IrsanAI-LRP/
