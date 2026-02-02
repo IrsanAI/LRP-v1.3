@@ -6,7 +6,10 @@
 [![GitHub stars](https://img.shields.io/github/stars/pythonlover2023/IrsanAI-LRP)](https://github.com/pythonlover2023/IrsanAI-LRP/stargazers)
 [![Version](https://img.shields.io/badge/version-v1.3-blue)](https://github.com/pythonlover2023/IrsanAI-LRP)
 
-## Live Demo
+## Offical Landingpage
+👉 https://github.com/pythonlover2023/IrsanAI-LRP-v1.3/IrsanAI - Logic Factory.html
+
+## Primary Edition and Insights
 👉 https://pythonlover2023.github.io/IrsanAI-LRP/
 
 ## Beschreibung
@@ -21,7 +24,7 @@ Perfekt für Entwickler, die komplexe Projekte (Apps, ML-Dashboards, Games) mit 
 - ⚡ Verbesserte Token-Optimierung
 
 ## Schnellstart
-1. Öffne die [Live Demo](https://pythonlover2023.github.io/IrsanAI-LRP/)
+1. Öffne die [Live Demo](https://pythonlover2023.github.io/IrsanAI-LRP-v1.3/)
 2. Gib deine Anfrage ein
 3. Analysiere → Konfiguriere → Generiere LRP-Protokoll
 4. Kopiere und paste es in dein LLM (ChatGPT, Claude, etc.)
