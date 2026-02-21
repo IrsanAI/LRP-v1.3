@@ -36,11 +36,12 @@ IrsanAI-LRP v1.3 geht über klassische Prompt-Generatoren hinaus:
 - [Änderungsprotokoll](docs/changelog.md)
 - [LRP-HTML Audit & Optimierungsvorschläge](docs/lrp-html-audit.md)
 - [Erste Live-Erfahrung mit dem Protokoll](docs/first-experience.md)
-- [Professional GitHub Pages Landing (Entwurf)](website/index.html)
+- [Professional GitHub Pages Landing](website/index.html)
 - [Professionalization Roadmap](docs/professionalization-roadmap.md)
 - [Migration Guide](MIGRATION.md)
 - [Progress-to-Target (Ist/Soll Gap-Analyse)](docs/progress-to-fazit.md)
 - [WEG 1/WEG 2 + Probability-Modell für nächste Schritte](docs/weg1-weg2-probability-next-steps.md)
+- [Repo Validation Report (Konsistenzcheck)](docs/repo-validation-report.md)
 
 ## Repositories & Links
 - **Legacy Demo / Legacy Account:**
