@@ -1,41 +1,58 @@
 # IrsanAI-LRP v1.3 🚀
 
-**Next-Level Meta-Prompt Generator** – Ein strukturiertes Protokoll-System für zuverlässige, hardware-optimierte und token-effiziente LLM-Interaktionen.
+> **Revolutionäres Meta-Protokoll für robustes Prompt Engineering.**
+> Ein client-seitiges System zur strukturierten Generierung hochwertiger LRP-Protokolle für LLM-Workflows in Produkt-, Code- und Strategieprojekten.
 
-[![GitHub license](https://img.shields.io/github/license/pythonlover2023/IrsanAI-LRP)](https://github.com/pythonlover2023/IrsanAI-LRP/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/pythonlover2023/IrsanAI-LRP)](https://github.com/pythonlover2023/IrsanAI-LRP/stargazers)
-[![Version](https://img.shields.io/badge/version-v1.3-blue)](https://github.com/pythonlover2023/IrsanAI-LRP)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-v1.3-blue.svg)](https://github.com/IrsanAI/LRP-v1.3)
 
-## Offical Landingpage
-👉 [https://github.com/pythonlover2023/IrsanAI-LRP-v1.3/IrsanAI_Logic_Factory.html](https://pythonlover2023.github.io/IrsanAI-Landingpage-Logic-Factory/)
+## Warum dieses Projekt?
+IrsanAI-LRP v1.3 geht über klassische Prompt-Generatoren hinaus:
+- **Intent-Analyse statt reiner Textvorlage**
+- **Entscheidungslogik für Ausführungswege** (direkt vs. OS/HW-bewusst)
+- **Fallback- und Kompatibilitätsmechaniken** für robuste Nutzung
+- **Token-orientierte Strukturierung** für produktive LLM-Sessions
+- **Mehrsprachige Landingpage** (EN, DE, BS, ES, TR, IT, FR, ZH) für internationales Onboarding
 
-## Primary Edition and Insights
-👉 https://pythonlover2023.github.io/IrsanAI-LRP/
+## Projektstatus
+- ✅ Produktiv nutzbar (Single-File HTML App)
+- ✅ Dokumentation modernisiert
+- ✅ Struktur für professionellen Open-Source-Betrieb vorbereitet
+- 🔄 Ziel-Migration: `https://github.com/IrsanAI/LRP-v1.3`
 
-## Beschreibung
-IrsanAI-LRP v1.3 ist ein client-seitiges Web-Tool (reine HTML/JS/CSS), das dynamisch optimierte Meta-Prompts (LRP-Protokolle) für LLMs generiert. Es analysiert User-Intents, empfiehlt Wege (Direkt vs. OS/HW-Detektion) und integriert Features wie Intent-Confidence-Score und Emergency Fallback.
-
-Perfekt für Entwickler, die komplexe Projekte (Apps, ML-Dashboards, Games) mit LLMs bauen wollen – ohne Halluzinationen oder suboptimale Ergebnisse.
-
-## Neu in v1.3
-- ⭐ Intent-Confidence Score
-- ⭐ Emergency Fallback
-- ⭐ Version-Checker
-- ⚡ Verbesserte Token-Optimierung
-
-## Schnellstart
-1. Öffne die [Live Demo](https://pythonlover2023.github.io/IrsanAI-LRP-v1.3/)
-2. Gib deine Anfrage ein
-3. Analysiere → Konfiguriere → Generiere LRP-Protokoll
-4. Kopiere und paste es in dein LLM (ChatGPT, Claude, etc.)
+## Start in 30 Sekunden
+1. Repository klonen.
+2. `index.html` direkt im Browser öffnen **oder** lokal per Webserver starten:
+   ```bash
+   python3 -m http.server 4173
+   ```
+3. Im Browser aufrufen: `http://127.0.0.1:4173/index.html`
+4. Anfrage eingeben → analysieren → LRP generieren → in dein LLM einsetzen.
 
 ## Dokumentation
+- [Projektüberblick](docs/overview.md)
 - [Features](docs/features.md)
-- [Usage Guide](docs/usage.md)
-- [Changelog](docs/changelog.md)
+- [Nutzungsleitfaden](docs/usage.md)
+- [Änderungsprotokoll](docs/changelog.md)
+- [LRP-HTML Audit & Optimierungsvorschläge](docs/lrp-html-audit.md)
+- [Erste Live-Erfahrung mit dem Protokoll](docs/first-experience.md)
+- [Professional GitHub Pages Landing](website/index.html)
+- [Professionalization Roadmap](docs/professionalization-roadmap.md)
+- [Migration Guide](MIGRATION.md)
+- [Progress-to-Target (Ist/Soll Gap-Analyse)](docs/progress-to-fazit.md)
+- [WEG 1/WEG 2 + Probability-Modell für nächste Schritte](docs/weg1-weg2-probability-next-steps.md)
+- [Repo Validation Report (Konsistenzcheck)](docs/repo-validation-report.md)
 
-## Contributing
-Pull Requests willkommen! Issues unter https://github.com/pythonlover2023/IrsanAI-LRP/issues
+## Repositories & Links
+- **Legacy Demo / Legacy Account:**
+  - https://pythonlover2023.github.io/IrsanAI-LRP/
+  - https://pythonlover2023.github.io/IrsanAI-Landingpage-Logic-Factory/
+- **Aktuelles Ziel-Repository:**
+  - https://github.com/IrsanAI/LRP-v1.3
 
-## License
-MIT License – frei nutzbar und modifizierbar.
+## Mitwirken
+Beiträge sind willkommen – von UX-Verbesserungen bis zu Protokoll-Forschung.
+Siehe: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Lizenz
+Dieses Projekt steht unter der [MIT License](LICENSE).
