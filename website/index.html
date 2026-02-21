@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IrsanAI LRP v1.3 — Professional Landing</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #131a31;
+      --accent: #6d7dff;
+      --accent2: #8f5bff;
+      --text: #eaf0ff;
+      --muted: #b2bddb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, system-ui, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 20% 20%, #1e2b66 0%, var(--bg) 40%), var(--bg);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .hero { padding: 42px 0 28px; }
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; margin: 0 0 16px; }
+    p { color: var(--muted); line-height: 1.6; }
+    .pill { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #27305a; font-size: 12px; }
+    .lang { display:flex; align-items:center; gap:8px; background:#1a2345; border:1px solid #2d3b73; padding:8px 10px; border-radius:10px; }
+    .lang select { background:#101a3a; color:#eaf0ff; border:1px solid #3a4d90; border-radius:8px; padding:6px 8px; }
+    .cta { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      text-decoration: none; color: #fff; font-weight: 600;
+      padding: 12px 18px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+    .btn.secondary { background: #243055; color: #dbe4ff; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 14px; margin-top: 26px; }
+    .card { background: rgba(19,26,49,.9); border: 1px solid #2d3b73; border-radius: 14px; padding: 16px; }
+    .card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .section { margin-top: 30px; }
+    .kpi { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; }
+    .kpi .card strong { font-size: 1.35rem; display: block; }
+    footer { margin-top: 36px; color: #90a1d8; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="pill">IrsanAI • LRP v1.3</span>
+      <label class="lang" for="langSelect">
+        <span data-i18n="langLabel">Language</span>
+        <select id="langSelect" aria-label="Language Selector">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="bs">Bosanski</option>
+          <option value="es">Español</option>
+          <option value="tr">Türkçe</option>
+          <option value="it">Italiano</option>
+          <option value="fr">Français</option>
+          <option value="zh">中文</option>
+        </select>
+      </label>
+    </div>
+
+    <section class="hero">
+      <h1 data-i18n="heroTitle">From Prompting to<br>Protocol Thinking.</h1>
+      <p data-i18n="heroText">
+        IrsanAI-LRP is a meta-protocol operator for professional LLM workflows.
+        Instead of only generating prompts, it structures analysis, decision logic,
+        compatibility and robust fallback into a reproducible process.
+      </p>
+      <div class="cta">
+        <a class="btn" href="../index.html" data-i18n="ctaApp">Open LRP Web App</a>
+        <a class="btn secondary" href="../docs/professionalization-roadmap.md" data-i18n="ctaRoadmap">View Roadmap</a>
+        <a class="btn secondary" href="../docs/lrp-html-audit.md" data-i18n="ctaAudit">Read HTML Audit</a>
+      </div>
+    </section>
+
+    <section class="section grid">
+      <article class="card"><h3 data-i18n="card1Title">Intent Intelligence</h3><p data-i18n="card1Body">Confidence scoring and path selection create clarity before actual LLM execution.</p></article>
+      <article class="card"><h3 data-i18n="card2Title">Operational Reliability</h3><p data-i18n="card2Body">Emergency fallback and structured protocol output reduce execution risks.</p></article>
+      <article class="card"><h3 data-i18n="card3Title">Business-Ready</h3><p data-i18n="card3Body">Documentation, migration and governance foundations for professional operations.</p></article>
+    </section>
+
+    <section class="section kpi">
+      <div class="card"><strong>v1.3</strong><span data-i18n="kpi1">Current protocol version</span></div>
+      <div class="card"><strong>Client-Only</strong><span data-i18n="kpi2">No backend required</span></div>
+      <div class="card"><strong data-i18n="kpi3v">Fast Onboarding</strong><span data-i18n="kpi3">Ready locally in minutes</span></div>
+    </section>
+
+    <footer data-i18n="footer">Designed for modern AI builders — inspired by IrsanAI LRP thinking.</footer>
+  </div>
+
+  <script>
+    const t = {
+      en: {
+        langLabel: 'Language',
+        heroTitle: 'From Prompting to<br>Protocol Thinking.',
+        heroText: 'IrsanAI-LRP is a meta-protocol operator for professional LLM workflows. Instead of only generating prompts, it structures analysis, decision logic, compatibility and robust fallback into a reproducible process.',
+        ctaApp: 'Open LRP Web App', ctaRoadmap: 'View Roadmap', ctaAudit: 'Read HTML Audit',
+        card1Title: 'Intent Intelligence', card1Body: 'Confidence scoring and path selection create clarity before actual LLM execution.',
+        card2Title: 'Operational Reliability', card2Body: 'Emergency fallback and structured protocol output reduce execution risks.',
+        card3Title: 'Business-Ready', card3Body: 'Documentation, migration and governance foundations for professional operations.',
+        kpi1: 'Current protocol version', kpi2: 'No backend required', kpi3v: 'Fast Onboarding', kpi3: 'Ready locally in minutes',
+        footer: 'Designed for modern AI builders — inspired by IrsanAI LRP thinking.'
+      },
+      de: {
+        langLabel: 'Sprache', heroTitle: 'Von Prompting zu<br>Protocol Thinking.',
+        heroText: 'IrsanAI-LRP ist ein Meta-Protokoll-Operator für professionelle LLM-Workflows. Statt nur Prompts zu erzeugen, strukturiert es Analyse, Entscheidungslogik, Kompatibilität und robustes Fallback in einem reproduzierbaren Prozess.',
+        ctaApp: 'LRP Web-App öffnen', ctaRoadmap: 'Roadmap ansehen', ctaAudit: 'HTML-Audit lesen',
+        card1Title: 'Intent Intelligence', card1Body: 'Confidence-Scoring und Pfadwahl schaffen Klarheit vor der eigentlichen LLM-Ausführung.',
+        card2Title: 'Operative Zuverlässigkeit', card2Body: 'Emergency-Fallback und strukturierte Protokollausgabe reduzieren Ausführungsrisiken.',
+        card3Title: 'Business-Ready', card3Body: 'Dokumentations-, Migrations- und Governance-Fundament für professionellen Betrieb.',
+        kpi1: 'Aktuelle Protokollversion', kpi2: 'Kein Backend erforderlich', kpi3v: 'Schnelles Onboarding', kpi3: 'Lokal in Minuten startklar',
+        footer: 'Entwickelt für moderne AI-Builder — inspiriert von IrsanAI LRP Thinking.'
+      },
+      bs: {
+        langLabel: 'Jezik', heroTitle: 'Od promptinga do<br>protokolnog razmišljanja.',
+        heroText: 'IrsanAI-LRP je meta-protokol operator za profesionalne LLM tokove rada. Umjesto samog generisanja promptova, strukturira analizu, logiku odluke, kompatibilnost i robustan fallback u ponovljiv proces.',
+        ctaApp: 'Otvori LRP web aplikaciju', ctaRoadmap: 'Pogledaj roadmap', ctaAudit: 'Pročitaj HTML audit',
+        card1Title: 'Intent inteligencija', card1Body: 'Ocjena pouzdanosti i izbor puta daju jasnoću prije stvarnog LLM izvršavanja.',
+        card2Title: 'Operativna pouzdanost', card2Body: 'Emergency fallback i strukturirani izlaz protokola smanjuju rizike izvršavanja.',
+        card3Title: 'Spremno za biznis', card3Body: 'Temelji dokumentacije, migracije i governance-a za profesionalan rad.',
+        kpi1: 'Trenutna verzija protokola', kpi2: 'Backend nije potreban', kpi3v: 'Brzo uključivanje', kpi3: 'Lokalno spremno za nekoliko minuta',
+        footer: 'Dizajnirano za moderne AI graditelje — inspirisano IrsanAI LRP razmišljanjem.'
+      },
+      es: {
+        langLabel: 'Idioma', heroTitle: 'Del prompting al<br>pensamiento por protocolos.',
+        heroText: 'IrsanAI-LRP es un operador de meta-protocolo para flujos profesionales con LLM. En lugar de solo generar prompts, estructura análisis, lógica de decisión, compatibilidad y fallback robusto en un proceso reproducible.',
+        ctaApp: 'Abrir app web LRP', ctaRoadmap: 'Ver hoja de ruta', ctaAudit: 'Leer auditoría HTML',
+        card1Title: 'Inteligencia de intención', card1Body: 'La puntuación de confianza y la selección de ruta aportan claridad antes de ejecutar el LLM.',
+        card2Title: 'Fiabilidad operativa', card2Body: 'Fallback de emergencia y salida estructurada reducen riesgos de ejecución.',
+        card3Title: 'Listo para negocio', card3Body: 'Base de documentación, migración y gobernanza para operación profesional.',
+        kpi1: 'Versión actual del protocolo', kpi2: 'No requiere backend', kpi3v: 'Onboarding rápido', kpi3: 'Listo localmente en minutos',
+        footer: 'Diseñado para builders modernos de IA — inspirado en el pensamiento LRP de IrsanAI.'
+      },
+      tr: {
+        langLabel: 'Dil', heroTitle: 'Prompting’den<br>protokol düşüncesine.',
+        heroText: 'IrsanAI-LRP, profesyonel LLM iş akışları için bir meta-protokol operatörüdür. Sadece prompt üretmek yerine analizi, karar mantığını, uyumluluğu ve sağlam fallback yapısını tekrarlanabilir bir sürece dönüştürür.',
+        ctaApp: 'LRP web uygulamasını aç', ctaRoadmap: 'Yol haritasını görüntüle', ctaAudit: 'HTML denetimini oku',
+        card1Title: 'Niyet zekâsı', card1Body: 'Güven skoru ve yol seçimi, gerçek LLM çalıştırmasından önce netlik sağlar.',
+        card2Title: 'Operasyonel güvenilirlik', card2Body: 'Acil fallback ve yapılandırılmış çıktı, yürütme risklerini azaltır.',
+        card3Title: 'İş dünyasına hazır', card3Body: 'Profesyonel operasyon için dokümantasyon, migrasyon ve yönetişim temeli.',
+        kpi1: 'Güncel protokol sürümü', kpi2: 'Backend gerekmez', kpi3v: 'Hızlı başlangıç', kpi3: 'Dakikalar içinde yerelde hazır',
+        footer: 'Modern AI üreticileri için tasarlandı — IrsanAI LRP düşüncesinden ilhamla.'
+      },
+      it: {
+        langLabel: 'Lingua', heroTitle: 'Dal prompting al<br>pensiero a protocollo.',
+        heroText: 'IrsanAI-LRP è un operatore di meta-protocollo per workflow LLM professionali. Invece di generare solo prompt, struttura analisi, logica decisionale, compatibilità e fallback robusto in un processo riproducibile.',
+        ctaApp: 'Apri web app LRP', ctaRoadmap: 'Vedi roadmap', ctaAudit: 'Leggi audit HTML',
+        card1Title: 'Intelligenza d’intento', card1Body: 'Punteggio di confidenza e scelta del percorso danno chiarezza prima dell’esecuzione LLM.',
+        card2Title: 'Affidabilità operativa', card2Body: 'Fallback di emergenza e output strutturato riducono i rischi operativi.',
+        card3Title: 'Pronto per il business', card3Body: 'Fondamenta di documentazione, migrazione e governance per operazioni professionali.',
+        kpi1: 'Versione corrente del protocollo', kpi2: 'Nessun backend richiesto', kpi3v: 'Onboarding rapido', kpi3: 'Pronto in locale in pochi minuti',
+        footer: 'Progettato per moderni AI builder — ispirato al thinking LRP di IrsanAI.'
+      },
+      fr: {
+        langLabel: 'Langue', heroTitle: 'Du prompting à la<br>pensée protocolaire.',
+        heroText: 'IrsanAI-LRP est un opérateur de méta-protocole pour des workflows LLM professionnels. Au lieu de seulement générer des prompts, il structure l’analyse, la logique de décision, la compatibilité et un fallback robuste dans un processus reproductible.',
+        ctaApp: 'Ouvrir l’app web LRP', ctaRoadmap: 'Voir la roadmap', ctaAudit: 'Lire l’audit HTML',
+        card1Title: 'Intelligence d’intention', card1Body: 'Le score de confiance et le choix de trajectoire clarifient l’exécution LLM.',
+        card2Title: 'Fiabilité opérationnelle', card2Body: 'Le fallback d’urgence et la sortie structurée réduisent les risques.',
+        card3Title: 'Prêt pour le business', card3Body: 'Base documentaire, migration et gouvernance pour un usage professionnel.',
+        kpi1: 'Version actuelle du protocole', kpi2: 'Aucun backend requis', kpi3v: 'Onboarding rapide', kpi3: 'Prêt localement en quelques minutes',
+        footer: 'Conçu pour les builders IA modernes — inspiré par la pensée LRP d’IrsanAI.'
+      },
+      zh: {
+        langLabel: '语言', heroTitle: '从提示词走向<br>协议化思维。',
+        heroText: 'IrsanAI-LRP 是面向专业 LLM 工作流的元协议操作器。它不只是生成提示词，而是将分析、决策逻辑、兼容性与稳健回退整合为可复现流程。',
+        ctaApp: '打开 LRP Web 应用', ctaRoadmap: '查看路线图', ctaAudit: '阅读 HTML 审计',
+        card1Title: '意图智能', card1Body: '置信评分与路径选择在执行前提供清晰判断。',
+        card2Title: '运行可靠性', card2Body: '紧急回退与结构化协议输出可降低执行风险。',
+        card3Title: '企业级就绪', card3Body: '文档、迁移与治理基础支撑专业化运营。',
+        kpi1: '当前协议版本', kpi2: '无需后端', kpi3v: '快速上手', kpi3: '几分钟即可本地运行',
+        footer: '为现代 AI 构建者而设计——灵感来自 IrsanAI LRP 思维。'
+      }
+    };
+
+    function applyLang(lang) {
+      const dict = t[lang] || t.en;
+      document.documentElement.lang = lang;
+      localStorage.setItem('lrp_lang', lang);
+      for (const el of document.querySelectorAll('[data-i18n]')) {
+        const key = el.getAttribute('data-i18n');
+        if (!dict[key]) continue;
+        if (key === 'heroTitle') el.innerHTML = dict[key];
+        else el.textContent = dict[key];
+      }
+    }
+
+    const langSelect = document.getElementById('langSelect');
+    const browserLang = (navigator.language || 'en').slice(0,2);
+    const initial = localStorage.getItem('lrp_lang') || (t[browserLang] ? browserLang : 'en');
+    langSelect.value = initial;
+    applyLang(initial);
+    langSelect.addEventListener('change', (e) => applyLang(e.target.value));
+  </script>
+</body>
+</html>
