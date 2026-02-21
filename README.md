@@ -40,6 +40,7 @@ IrsanAI-LRP v1.3 geht über klassische Prompt-Generatoren hinaus:
 - [Professionalization Roadmap](docs/professionalization-roadmap.md)
 - [Migration Guide](MIGRATION.md)
 - [Progress-to-Target (Ist/Soll Gap-Analyse)](docs/progress-to-fazit.md)
+- [WEG 1/WEG 2 + Probability-Modell für nächste Schritte](docs/weg1-weg2-probability-next-steps.md)
 
 ## Repositories & Links
 - **Legacy Demo / Legacy Account:**
