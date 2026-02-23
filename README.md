@@ -56,3 +56,33 @@ Siehe: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Lizenz
 Dieses Projekt steht unter der [MIT License](LICENSE).
+
+## Hinweis für Entwickler (LOP – Liste offener Punkte)
+
+Was aus meiner Sicht noch offen ist (fachlich, nicht technisch blockiert):
+
+1. **Messbare Qualitätssicherung (Status: offen)**
+   Es gibt bereits strategische Zielbilder für Regression, Snapshots und CI-Qualitätsgates, aber noch keine umgesetzte Test-Suite mit Referenz-Prompts im Repo.
+   **Weiterführung:** Als nächsten Schritt einen Referenzkorpus (mind. 20 Prompts) anlegen, erwartete LRP-Outputs als Snapshots versionieren und diese Prüfungen per GitHub Actions automatisch laufen lassen.
+
+2. **Explainability der Analyse im LRP-Core (Status: offen)**
+   Die Dokumentation beschreibt klar den Bedarf für einen nachvollziehbaren „Decision Trace“, im UI selbst ist diese Transparenz aktuell jedoch noch nicht implementiert.
+   **Weiterführung:** In `index.html` zunächst einen kompakten Explainability-Block ergänzen (gewichtete Trigger + Top-Faktoren), danach mit den Regression-Samples validieren.
+
+3. **Architektur-Entkopplung des monolithischen Core (Status: offen)**
+   Der LRP-Core liegt weiterhin als Single-File (`index.html`) vor; die Modularisierung ist als mittelfristige Roadmap definiert, aber noch nicht umgesetzt.
+   **Weiterführung:** Schrittweise Split-Strategie ohne Verhaltensbruch: zuerst Analyse-Logik auslagern (`analysis.js`), dann Template-Layer (`protocol-template.js`), zuletzt UI/Styles trennen.
+
+4. **Governance-Paket für professionellen Betrieb (Status: offen)**
+   `SECURITY.md`, `CODEOWNERS` sowie Issue-/PR-Templates sind in den Strategie-Dokumenten vorgesehen, im aktuellen Repo aber noch nicht vorhanden.
+   **Weiterführung:** Minimalpaket in einem eigenen Governance-PR einführen, damit externe Beiträge, Sicherheitsmeldungen und Verantwortlichkeiten klar standardisiert sind.
+
+5. **Migration auf Ziel-Repository finalisieren (Status: teilweise offen)**
+   Das Ziel-Repo `IrsanAI/LRP-v1.3` ist in README und Migrationsdoku bereits verankert; gleichzeitig existieren im Core noch Legacy-Links auf `pythonlover2023/IrsanAI-LRP`.
+   **Weiterführung:** Nach dem Umzug alle verbleibenden Legacy-Links (insb. in `index.html`) auf `IrsanAI/LRP-v1.3` umstellen, GitHub Pages im Zielrepo final aktivieren und das alte Repo anschließend als „closed/archived“ kennzeichnen.
+
+### Bereits erledigt (aktuell bestätigt)
+- ✅ Dokumentationsfundament inkl. Überblick, Features, Usage, Changelog und Gap-Analyse ist vorhanden.
+- ✅ Professionalisierungs-Roadmap und Migrationsleitfaden sind dokumentiert.
+- ✅ Mehrsprachige Landingpage (8 Sprachen) ist vorhanden.
+- ✅ GitHub-Pages-Workflow für statische Auslieferung ist eingerichtet.
