@@ -61,28 +61,33 @@ Dieses Projekt steht unter der [MIT License](LICENSE).
 
 Was aus meiner Sicht noch offen ist (fachlich, nicht technisch blockiert):
 
+_Stand der Prüfung: aktuell gegen den Inhalt dieses Repos validiert._
+
 1. **Messbare Qualitätssicherung (Status: offen)**
-   Es gibt bereits strategische Zielbilder für Regression, Snapshots und CI-Qualitätsgates, aber noch keine umgesetzte Test-Suite mit Referenz-Prompts im Repo.
-   **Weiterführung:** Als nächsten Schritt einen Referenzkorpus (mind. 20 Prompts) anlegen, erwartete LRP-Outputs als Snapshots versionieren und diese Prüfungen per GitHub Actions automatisch laufen lassen.
+   Eine dedizierte Regression-/Snapshot-Test-Suite für Referenz-Prompts ist weiterhin nicht im Repo enthalten (es existieren aktuell keine entsprechenden Testartefakte oder Test-Runner).
+   **Weiterführung:** Referenzkorpus (z. B. 20+ repräsentative Prompts) definieren, erwartete LRP-Outputs als Snapshots versionieren und in CI automatisch gegen neue Änderungen prüfen.
 
 2. **Explainability der Analyse im LRP-Core (Status: offen)**
-   Die Dokumentation beschreibt klar den Bedarf für einen nachvollziehbaren „Decision Trace“, im UI selbst ist diese Transparenz aktuell jedoch noch nicht implementiert.
-   **Weiterführung:** In `index.html` zunächst einen kompakten Explainability-Block ergänzen (gewichtete Trigger + Top-Faktoren), danach mit den Regression-Samples validieren.
+   Die Analyse läuft regelbasiert, aber ein sichtbarer Explainability-/Decision-Trace für Nutzer ist im UI weiterhin nicht vorhanden.
+   **Weiterführung:** In `index.html` einen „Warum dieses Ergebnis?“-Block ergänzen (Top-Signale + Gewichtung) und die Darstellung anhand der Referenz-Prompts gegenprüfen.
 
 3. **Architektur-Entkopplung des monolithischen Core (Status: offen)**
-   Der LRP-Core liegt weiterhin als Single-File (`index.html`) vor; die Modularisierung ist als mittelfristige Roadmap definiert, aber noch nicht umgesetzt.
-   **Weiterführung:** Schrittweise Split-Strategie ohne Verhaltensbruch: zuerst Analyse-Logik auslagern (`analysis.js`), dann Template-Layer (`protocol-template.js`), zuletzt UI/Styles trennen.
+   Der Kern ist weiterhin in einer zentralen Datei (`index.html`) gebündelt; die in der Roadmap beschriebene Modultrennung wurde noch nicht begonnen.
+   **Weiterführung:** In kleinen Schritten trennen: zuerst Analyse-Logik, dann Protokoll-Template-Generator, danach UI/Styles. Pro Schritt Snapshot-Vergleich, um Verhalten stabil zu halten.
 
 4. **Governance-Paket für professionellen Betrieb (Status: offen)**
-   `SECURITY.md`, `CODEOWNERS` sowie Issue-/PR-Templates sind in den Strategie-Dokumenten vorgesehen, im aktuellen Repo aber noch nicht vorhanden.
-   **Weiterführung:** Minimalpaket in einem eigenen Governance-PR einführen, damit externe Beiträge, Sicherheitsmeldungen und Verantwortlichkeiten klar standardisiert sind.
+   `SECURITY.md`, `CODEOWNERS` und standardisierte Issue-/PR-Templates fehlen weiterhin.
+   **Weiterführung:** Governance-Minimum als separaten PR einführen (Security-Policy + Verantwortlichkeiten + Vorlagen), damit externe Beiträge klarer und skalierbarer bearbeitet werden können.
 
 5. **Migration auf Ziel-Repository finalisieren (Status: teilweise offen)**
-   Das Ziel-Repo `IrsanAI/LRP-v1.3` ist in README und Migrationsdoku bereits verankert; gleichzeitig existieren im Core noch Legacy-Links auf `pythonlover2023/IrsanAI-LRP`.
-   **Weiterführung:** Nach dem Umzug alle verbleibenden Legacy-Links (insb. in `index.html`) auf `IrsanAI/LRP-v1.3` umstellen, GitHub Pages im Zielrepo final aktivieren und das alte Repo anschließend als „closed/archived“ kennzeichnen.
+   Positiv: Das Zielrepo `IrsanAI/LRP-v1.3` ist in README/Migration bereits verankert. Offen: Im Core (`index.html`) sind noch Legacy-Links auf `pythonlover2023/IrsanAI-LRP` enthalten.
+   **Weiterführung:** Legacy-Links im Core auf das Zielrepo aktualisieren, Ziel-Pages final verifizieren und das alte Repo anschließend klar als Legacy/Archiv markieren.
 
 ### Bereits erledigt (aktuell bestätigt)
 - ✅ Dokumentationsfundament inkl. Überblick, Features, Usage, Changelog und Gap-Analyse ist vorhanden.
 - ✅ Professionalisierungs-Roadmap und Migrationsleitfaden sind dokumentiert.
 - ✅ Mehrsprachige Landingpage (8 Sprachen) ist vorhanden.
 - ✅ GitHub-Pages-Workflow für statische Auslieferung ist eingerichtet.
+
+### Kurzfazit
+Der aktuelle Fokus sollte auf **P1 Qualitätssicherung** (Regression/Snapshots) liegen, weil damit die Basis für die nächsten Punkte (Explainability, Modularisierung, sichere Migration) belastbar abgesichert wird.
