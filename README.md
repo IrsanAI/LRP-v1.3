@@ -44,9 +44,8 @@ IrsanAI-LRP v1.3 geht über klassische Prompt-Generatoren hinaus:
 - [Repo Validation Report (Konsistenzcheck)](docs/repo-validation-report.md)
 
 ## Repositories & Links
-- **Legacy Demo / Legacy Account:**
-  - https://pythonlover2023.github.io/IrsanAI-LRP/
-  - https://pythonlover2023.github.io/IrsanAI-Landingpage-Logic-Factory/
+- **LIVE USE:**
+  - [https://irsanai.github.io/LRP-v1.3/][Live Use]
 - **Aktuelles Ziel-Repository:**
   - https://github.com/IrsanAI/LRP-v1.3
 
