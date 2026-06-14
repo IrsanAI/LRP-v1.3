@@ -16,25 +16,45 @@ exports.handler = async (event) => {
   }
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const incoming = JSON.parse(event.body);
+
+    // Convert Anthropic format → Groq (OpenAI-compatible)
+    const groqBody = {
+      model: 'llama-3.3-70b-versatile',
+      max_tokens: incoming.max_tokens || 1000,
+      temperature: 0.7,
+      messages: [
+        ...(incoming.system ? [{ role: 'system', content: incoming.system }] : []),
+        ...incoming.messages,
+      ],
+    };
+
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
       },
-      body: event.body,
+      body: JSON.stringify(groqBody),
     });
 
     const data = await response.json();
 
+    // Convert Groq response → Anthropic format (so HTML needs no change)
+    const translated = {
+      content: [{
+        type: 'text',
+        text: data.choices?.[0]?.message?.content || '',
+      }]
+    };
+
     return {
-      statusCode: response.status,
+      statusCode: response.ok ? 200 : response.status,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(translated),
     };
   } catch (err) {
     return {
