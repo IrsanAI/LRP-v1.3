@@ -49,10 +49,10 @@ function Waveform({ clarity }) {
   );
 }
 
-async function callClaude(apiKey, system, user) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+async function callClaude(system, user) {
+  const res = await fetch("/.netlify/functions/claude-proxy", {
     method:"POST",
-    headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    headers:{"Content-Type":"application/json"},
     body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system,messages:[{role:"user",content:user}]})
   });
   if(!res.ok) { const e=await res.json(); throw new Error(e?.error?.message||`API ${res.status}`); }
@@ -86,7 +86,7 @@ function ApiKeyScreen({ onSubmit }) {
 
 function App() {
   const [apiKey,setApiKey]=useState("");
-  const [phase,setPhase]=useState("apikey");
+  const [phase,setPhase]=useState("hero");
   const [started,setStarted]=useState(false);
   const [input,setInput]=useState("");
   const [analysis,setAnalysis]=useState(null);
@@ -113,7 +113,7 @@ function App() {
     if(!input.trim()||loading)return;
     setLoading(true);setError(null);
     try{
-      const r=await callClaude(apiKey,
+      const r=await callClaude(
         `Du bist Layer-0 eines Intent-Analyse-Systems. Analysiere die Nutzeraussage. Antworte NUR mit gültigem JSON ohne Backticks oder Erklärungen:\n{"intent_clarity":Zahl0bis100,"domain":"technisch|kreativ|strategisch|persönlich|analytisch","questions":[{"id":1,"text":"Klärungsfrage"},{"id":2,"text":"Klärungsfrage"}]}`,
         `Nutzeraussage: "${input}"`
       );
@@ -126,7 +126,7 @@ function App() {
     setLoading(true);setPhase("processing");
     const cl=analysis.questions.map(q=>`F: ${q.text}\nA: ${answers[q.id]||"–"}`).join("\n\n");
     try{
-      const r=await callClaude(apiKey,
+      const r=await callClaude(
         `Du bist ein LRP-Prompt-Generator. Antworte NUR mit gültigem JSON ohne Backticks:\n{"intent_statement":"1-2 Sätze präzise Zielformulierung","ready_prompt":"vollständiger optimierter Prompt für ein LLM","recommended_approach":"kurze Empfehlung welches LLM/Tool am besten passt"}`,
         `Ursprüngliche Aussage: "${input}"\n\nKlärungen:\n${cl}`
       );
