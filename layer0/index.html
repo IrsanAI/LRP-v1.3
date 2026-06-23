@@ -6,7 +6,7 @@
   <title>IrsanAI · Layer-0 · Intent Clarity</title>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #080C18; min-height: 100vh; }
@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel">
+<script type="text/babel" data-presets="react">
 const { useState, useEffect } = React;
 
 const C = { bg:"#080C18", surface:"#0E1428", surfaceHigh:"#141B35", border:"#1E2540", primary:"#7C6EFF", accent:"#FF9557", teal:"#4ECDC4", text:"#F0F0FA", muted:"#6B7492", danger:"#FF6B6B" };
