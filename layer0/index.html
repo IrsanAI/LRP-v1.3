@@ -50,7 +50,7 @@ function Waveform({ clarity }) {
 }
 
 async function callClaude(system, user) {
-  const res = await fetch("/.netlify/functions/claude-proxy", {
+  const res = await fetch(window.location.origin + "/.netlify/functions/claude-proxy", {
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system,messages:[{role:"user",content:user}]})
