@@ -156,7 +156,7 @@ function App() {
     const cl=analysis.questions.map(q=>`F: ${q.text}\nA: ${answers[q.id]||"–"}`).join("\n\n");
     try{
       const r=await callClaude(
-        `Du bist ein LRP-Prompt-Generator. Antworte NUR mit gültigem JSON ohne Backticks:\n{"intent_statement":"1-2 Sätze präzise Zielformulierung","ready_prompt":"vollständiger optimierter Prompt für ein LLM","recommended_approach":"kurze Empfehlung welches LLM/Tool am besten passt"}`,
+        `Du bist ein LRP-Prompt-Generator. Antworte NUR mit gültigem JSON ohne Backticks:\n{"intent_statement":"1-2 Sätze präzise Zielformulierung","ready_prompt":"vollständiger optimierter Prompt für ein LLM"}`,
         `Ursprüngliche Aussage: "${input}"\n\nKlärungen:\n${cl}`,
         log
       );
@@ -269,12 +269,7 @@ function App() {
                 <pre style={{fontFamily:"monospace",fontSize:"13px",lineHeight:1.65,color:"#C4CCEC",whiteSpace:"pre-wrap",wordBreak:"break-word",margin:0}}>{output.ready_prompt}</pre>
               </div>
 
-              {output.recommended_approach && (
-                <div style={{background:`${C.accent}12`,border:`1px solid ${C.accent}35`,borderRadius:"8px",padding:"16px",marginBottom:"14px"}}>
-                  <p style={{fontSize:"11px",color:C.accent,letterSpacing:"0.14em",marginBottom:"8px"}}>EMPFEHLUNG</p>
-                  <p style={{fontSize:"13px",lineHeight:1.6,margin:0}}>{output.recommended_approach}</p>
-                </div>
-              )}
+              {/* recommended_approach entfernt - lieferte zu generische Antworten */}
 
               <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"24px",marginBottom:"16px"}}>
                 {!fbDone ? (
