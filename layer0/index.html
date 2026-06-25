@@ -49,15 +49,37 @@ function Waveform({ clarity }) {
   );
 }
 
-async function callClaude(system, user) {
-  const res = await fetch(window.location.origin + "/.netlify/functions/claude-proxy", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system,messages:[{role:"user",content:user}]})
-  });
-  if(!res.ok) { const e=await res.json(); throw new Error(e?.error?.message||`API ${res.status}`); }
-  const d=await res.json();
-  return JSON.parse((d.content?.map(b=>b.text||"").join("")||"").replace(/```json|```/g,"").trim());
+async function callClaude(system, user, log) {
+  const url = window.location.origin + "/.netlify/functions/claude-proxy";
+  log(`→ POST ${url}`);
+  let res;
+  try {
+    res = await fetch(url, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system,messages:[{role:"user",content:user}]})
+    });
+  } catch (netErr) {
+    log(`✗ NETZWERKFEHLER: ${netErr.message}`);
+    throw new Error(`Netzwerkfehler: ${netErr.message}`);
+  }
+  const raw = await res.text();
+  log(`← Status ${res.status} ${res.statusText}`);
+  log(`← Rohantwort (${raw.length} Zeichen): ${raw.slice(0,400)}${raw.length>400?" …":""}`);
+  if(!res.ok) {
+    let msg = `HTTP ${res.status}`;
+    try { const e=JSON.parse(raw); msg = (typeof e.error==="string"?e.error:e?.error?.message) || msg; } catch(_){}
+    log(`✗ FEHLER (HTTP ${res.status}): ${msg}`);
+    throw new Error(msg);
+  }
+  let data;
+  try { data = JSON.parse(raw); }
+  catch(parseErr) { log(`✗ JSON-PARSE-FEHLER (Antwort): ${parseErr.message}`); throw new Error(`Antwort kein gültiges JSON: ${parseErr.message}`); }
+  const text = data.content?.map(b=>b.text||"").join("") || "";
+  log(`← Modelltext (${text.length} Zeichen): ${text.slice(0,300)}${text.length>300?" …":""}`);
+  const cleaned = text.replace(/```json|```/g,"").trim();
+  try { return JSON.parse(cleaned); }
+  catch(parseErr2) { log(`✗ JSON-PARSE-FEHLER (Inhalt): ${parseErr2.message}`); throw new Error(`Konnte Modell-Antwort nicht parsen: ${parseErr2.message}`); }
 }
 
 const iStyle = {width:"100%",background:C.surface,border:`1px solid ${C.border}`,borderRadius:"8px",color:C.text,fontSize:"15px",padding:"14px 16px",outline:"none",lineHeight:1.6,fontFamily:"inherit",transition:"border-color 0.2s"};
@@ -98,6 +120,9 @@ function App() {
   const [rating,setRating]=useState(null);
   const [fbComment,setFbComment]=useState("");
   const [fbDone,setFbDone]=useState(false);
+  const [debugLog,setDebugLog]=useState([]);
+  const [showDebug,setShowDebug]=useState(false);
+  const log=(msg)=>setDebugLog(prev=>[...prev,`${new Date().toLocaleTimeString()}  ${msg}`]);
 
   const {displayed,done}=useTypewriter("Was soll nach diesem\nGespräch anders sein\nals vorher?",32,started);
 
@@ -112,26 +137,32 @@ function App() {
   const analyzeIntent=async()=>{
     if(!input.trim()||loading)return;
     setLoading(true);setError(null);
+    log(`▶ analyzeIntent gestartet — Input: "${input.slice(0,80)}"`);
     try{
       const r=await callClaude(
         `Du bist Layer-0 eines Intent-Analyse-Systems. Analysiere die Nutzeraussage. Antworte NUR mit gültigem JSON ohne Backticks oder Erklärungen:\n{"intent_clarity":Zahl0bis100,"domain":"technisch|kreativ|strategisch|persönlich|analytisch","questions":[{"id":1,"text":"Klärungsfrage"},{"id":2,"text":"Klärungsfrage"}]}`,
-        `Nutzeraussage: "${input}"`
+        `Nutzeraussage: "${input}"`,
+        log
       );
       setAnalysis(r);setPhase("questions");
-    }catch(e){setError(`Fehler: ${e.message}`);}
+      log("✓ Intent-Analyse erfolgreich");
+    }catch(e){setError(`Fehler: ${e.message}`);log(`✗ ABGEFANGEN: ${e.message}`);}
     setLoading(false);
   };
 
   const buildOutput=async()=>{
     setLoading(true);setPhase("processing");
+    log("▶ buildOutput gestartet");
     const cl=analysis.questions.map(q=>`F: ${q.text}\nA: ${answers[q.id]||"–"}`).join("\n\n");
     try{
       const r=await callClaude(
         `Du bist ein LRP-Prompt-Generator. Antworte NUR mit gültigem JSON ohne Backticks:\n{"intent_statement":"1-2 Sätze präzise Zielformulierung","ready_prompt":"vollständiger optimierter Prompt für ein LLM","recommended_approach":"kurze Empfehlung welches LLM/Tool am besten passt"}`,
-        `Ursprüngliche Aussage: "${input}"\n\nKlärungen:\n${cl}`
+        `Ursprüngliche Aussage: "${input}"\n\nKlärungen:\n${cl}`,
+        log
       );
       setOutput(r);setPhase("output");
-    }catch(e){setError("Generierung fehlgeschlagen.");setPhase("questions");}
+      log("✓ Output erfolgreich generiert");
+    }catch(e){setError("Generierung fehlgeschlagen.");setPhase("questions");log(`✗ ABGEFANGEN: ${e.message}`);}
     setLoading(false);
   };
 
@@ -277,6 +308,44 @@ function App() {
       <div style={{padding:"12px 24px",borderTop:`1px solid ${C.border}`,textAlign:"center"}}>
         <span style={{fontSize:"11px",color:C.muted,letterSpacing:"0.1em"}}>IrsanAI Layer-0 · Beta · github.com/IrsanAI/LRP-v1.3</span>
       </div>
+
+      {/* DEBUG PANEL */}
+      <button onClick={()=>setShowDebug(!showDebug)} style={{
+        position:"fixed",bottom:"16px",right:"16px",zIndex:50,
+        width:"44px",height:"44px",borderRadius:"50%",
+        background: debugLog.some(l=>l.includes("✗")) ? C.danger : C.surfaceHigh,
+        border:`1px solid ${C.border}`,color:"#fff",fontSize:"18px",
+        cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",
+        boxShadow:"0 2px 10px rgba(0,0,0,0.4)",
+      }}>🐛</button>
+
+      {showDebug && (
+        <div style={{
+          position:"fixed",bottom:"68px",right:"16px",left:"16px",maxWidth:"560px",
+          margin:"0 auto",maxHeight:"60vh",zIndex:50,
+          background:C.surfaceHigh,border:`1px solid ${C.border}`,borderRadius:"10px",
+          display:"flex",flexDirection:"column",boxShadow:"0 4px 24px rgba(0,0,0,0.5)",
+        }}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:`1px solid ${C.border}`}}>
+            <span style={{fontSize:"11px",color:C.muted,letterSpacing:"0.1em"}}>DEBUG-LOG ({debugLog.length})</span>
+            <div style={{display:"flex",gap:"8px"}}>
+              <button onClick={()=>{navigator.clipboard.writeText(debugLog.join("\n"));}} style={{background:"transparent",border:`1px solid ${C.border}`,color:C.muted,borderRadius:"5px",padding:"3px 10px",fontSize:"11px",cursor:"pointer"}}>Kopieren</button>
+              <button onClick={()=>setDebugLog([])} style={{background:"transparent",border:`1px solid ${C.border}`,color:C.muted,borderRadius:"5px",padding:"3px 10px",fontSize:"11px",cursor:"pointer"}}>Leeren</button>
+            </div>
+          </div>
+          <div style={{overflowY:"auto",padding:"12px 14px",fontFamily:"monospace",fontSize:"11px",lineHeight:1.6,color:"#C4CCEC"}}>
+            {debugLog.length===0
+              ? <span style={{color:C.muted}}>Noch keine Einträge — löse einen Intent aus.</span>
+              : debugLog.map((l,i)=>(
+                  <div key={i} style={{
+                    color: l.includes("✗") ? C.danger : l.includes("✓") ? C.teal : "#C4CCEC",
+                    marginBottom:"6px", wordBreak:"break-word",
+                  }}>{l}</div>
+                ))
+            }
+          </div>
+        </div>
+      )}
     </div>
   );
 }
